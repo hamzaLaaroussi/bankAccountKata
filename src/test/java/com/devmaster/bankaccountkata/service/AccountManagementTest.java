@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @WebMvcTest(AccountManagementImpl.class)
 @Import(AccountListStoreConfiguration.class)
-public class AccountManagementTest {
+class AccountManagementTest {
 
     @InjectMocks
     AccountManagementImpl accountManagement;

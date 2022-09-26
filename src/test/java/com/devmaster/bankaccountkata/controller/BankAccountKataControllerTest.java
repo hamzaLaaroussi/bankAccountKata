@@ -42,7 +42,7 @@ public class BankAccountKataControllerTest {
     Map<String, BankAccount> data;
 
     @Test
-    public void should_createNewAccount_When_createMethodIsCalled() throws Exception {
+    void should_createNewAccount_When_createMethodIsCalled() throws Exception {
         Client client = Client.builder()
                 .id(123456789)
                 .firstName("Jon")
@@ -63,7 +63,7 @@ public class BankAccountKataControllerTest {
     }
 
     @Test
-    public void should_ReturnOperation_When_callingDepositMethod() throws Exception {
+    void should_ReturnOperation_When_callingDepositMethod() throws Exception {
         Client client = Client.builder()
                 .id(123456789)
                 .firstName("Jon")
@@ -89,7 +89,7 @@ public class BankAccountKataControllerTest {
     }
 
     @Test
-    public void should_throwError_When_clientAccountNotFound() throws Exception {
+    void should_throwError_When_clientAccountNotFound() throws Exception {
         Client client = Client.builder()
                 .id(123456789)
                 .firstName("Jon")
@@ -109,12 +109,10 @@ public class BankAccountKataControllerTest {
                         .param("clientId", "111111111")
                         .param("amount", "120"))
                 .andDo(print())
-                .andExpect(status().isPreconditionFailed());
-
+                .andExpect(status().isBadRequest());
     }
-
     @Test
-    public void should_returnOperation_When_callingWithdrawMethod() throws Exception {
+    void should_returnOperation_When_callingWithdrawMethod() throws Exception {
         Client client = Client.builder().id(123456789).firstName("Jon").lastName("LEE").build();
         BankAccount bankAccount = new BankAccount();
         bankAccount.setClient(client);
@@ -138,7 +136,7 @@ public class BankAccountKataControllerTest {
 
 
     @Test
-    public void should_throwError_When_amountIsBiggerThanBalance() throws Exception {
+    void should_throwError_When_amountIsBiggerThanBalance() throws Exception {
         Client client = Client.builder().id(123456789).firstName("Jon").lastName("LEE").build();
         BankAccount bankAccount = new BankAccount();
         bankAccount.setClient(client);
@@ -153,12 +151,12 @@ public class BankAccountKataControllerTest {
                         .param("clientId", "123456789")
                         .param("amount", "120"))
                 .andDo(print())
-                .andExpect(status().isPreconditionFailed());
+                .andExpect(status().isBadRequest());
 
     }
 
     @Test
-    public void should_returnOperationList_When_callingWithdrawMethod() throws Exception {
+    void should_returnOperationList_When_callingWithdrawMethod() throws Exception {
         Client client = Client.builder().id(123456789).firstName("Jon").lastName("LEE").build();
         BankAccount bankAccount = new BankAccount();
         bankAccount.setClient(client);
@@ -181,11 +179,10 @@ public class BankAccountKataControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].amount").value(110))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].type").value("WITHDRAWAL"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].amount").value(10));
-
     }
 
     @Test
-    public void should_printStatement_When_callingStatementMethod() throws Exception {
+    void should_printStatement_When_callingStatementMethod() throws Exception {
         Client client = Client.builder().id(123456789).firstName("Jon").lastName("LEE").build();
         BankAccount bankAccount = new BankAccount();
         bankAccount.setClient(client);
