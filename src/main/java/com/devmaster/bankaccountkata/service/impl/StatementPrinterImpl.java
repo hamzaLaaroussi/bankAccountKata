@@ -27,11 +27,7 @@ public class StatementPrinterImpl implements StatementPrinter {
 
         String header = printHeader();
 
-        String operations = bankAccount
-                .getOperationList()
-                .stream()
-                .map(this::printOperation)
-                .collect(Collectors.joining(""));
+        String operations = printOperations(bankAccount);
 
         String printStatement = DASHED_LINE + header + operations + DASHED_LINE;
 
@@ -40,6 +36,7 @@ public class StatementPrinterImpl implements StatementPrinter {
         return printStatement;
     }
 
+
     private String printHeader() {
         return String.join("|"
                 , "date"
@@ -47,6 +44,14 @@ public class StatementPrinterImpl implements StatementPrinter {
                 , "amount"
                 , "balance"
                 , "\n");
+    }
+
+    private String printOperations(BankAccount bankAccount) {
+        return bankAccount
+                .getOperationList()
+                .stream()
+                .map(this::printOperation)
+                .collect(Collectors.joining(""));
     }
 
     private String printOperation(Operation operation) {
