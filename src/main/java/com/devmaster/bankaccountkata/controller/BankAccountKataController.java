@@ -37,14 +37,14 @@ public class BankAccountKataController {
         return new ResponseEntity<>(newAccount, HttpStatus.CREATED);
     }
 
-    @GetMapping("/deposit")
+    @PatchMapping("/deposit")
     public ResponseEntity<Operation> deposit(@RequestParam long clientId, @RequestParam BigDecimal amount) {
         BankAccount bankAccount = accountManagement.findAccountByClientId(clientId);
         Operation depositOperation = accountOperations.deposit(bankAccount, amount);
         return new ResponseEntity<>(depositOperation, HttpStatus.OK);
     }
 
-    @GetMapping("/withdraw")
+    @PatchMapping("/withdraw")
     public ResponseEntity<Operation> withdraw(@RequestParam long clientId, @RequestParam BigDecimal amount) {
         BankAccount bankAccount = accountManagement.findAccountByClientId(clientId);
         Operation withdrawOperation = accountOperations.withdraw(bankAccount, amount);

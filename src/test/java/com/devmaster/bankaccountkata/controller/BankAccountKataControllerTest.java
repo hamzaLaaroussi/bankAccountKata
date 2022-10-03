@@ -24,8 +24,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -77,7 +76,7 @@ public class BankAccountKataControllerTest {
         data.put(bankAccount.getAccountNum(), bankAccount);
 
         this.mockMvc
-                .perform(get("/api/bankaccountkata/deposit")
+                .perform(patch("/api/bankaccountkata/deposit")
                         .param("clientId", "123456789")
                         .param("amount", "1000"))
                 .andDo(print())
@@ -105,7 +104,7 @@ public class BankAccountKataControllerTest {
         data.put(bankAccount.getAccountNum(), bankAccount);
 
         this.mockMvc
-                .perform(get("/api/bankaccountkata/deposit")
+                .perform(patch("/api/bankaccountkata/deposit")
                         .param("clientId", "111111111")
                         .param("amount", "120"))
                 .andDo(print())
@@ -123,7 +122,7 @@ public class BankAccountKataControllerTest {
         data.put(bankAccount.getAccountNum(), bankAccount);
 
         this.mockMvc
-                .perform(get("/api/bankaccountkata/withdraw")
+                .perform(patch("/api/bankaccountkata/withdraw")
                         .param("clientId", "123456789")
                         .param("amount", "50"))
                 .andDo(print())
@@ -147,7 +146,7 @@ public class BankAccountKataControllerTest {
         data.put(bankAccount.getAccountNum(), bankAccount);
 
         this.mockMvc
-                .perform(get("/api/bankaccountkata/withdraw")
+                .perform(patch("/api/bankaccountkata/withdraw")
                         .param("clientId", "123456789")
                         .param("amount", "120"))
                 .andDo(print())
