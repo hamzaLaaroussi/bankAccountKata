@@ -1,12 +1,12 @@
 package com.devmaster.bankaccountkata.model;
 
+import com.devmaster.bankaccountkata.utils.AccountUtils;
 import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -14,7 +14,7 @@ import java.util.UUID;
 @Builder
 public class BankAccount {
 
-    private String accountNum = UUID.randomUUID().toString();
+    private String accountNum = AccountUtils.generateBankAccount();
     private LocalDate creationDate = LocalDate.now();
     private Client client;
     @Getter(onMethod_ = {@Synchronized})
@@ -22,6 +22,8 @@ public class BankAccount {
     private BigDecimal balance = new BigDecimal(0);
     @Getter(onMethod_ = {@Synchronized})
     @Setter(onMethod_ = {@Synchronized})
-    private List<Operation> operationList = new ArrayList<>();
+    private List<Operation> operations = new ArrayList<>();
+
+
 
 }

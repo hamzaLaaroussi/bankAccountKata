@@ -17,6 +17,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/api/bankaccountkata/")
+@CrossOrigin(origins = {"http://localhost:4200/"})
 public class BankAccountKataController {
 
     private final AccountManagement accountManagement;
@@ -37,8 +38,16 @@ public class BankAccountKataController {
         return new ResponseEntity<>(newAccount, HttpStatus.CREATED);
     }
 
+    @GetMapping("/{clientId}")
+    public ResponseEntity<BankAccount> findBankAccount(@PathVariable("clientId") long clientId) {
+        log.info("Start getting account by Id");
+        BankAccount newAccount = accountManagement.findAccountByClientId(clientId);
+        return new ResponseEntity<>(newAccount, HttpStatus.OK);
+    }
+
     @PatchMapping("/deposit")
     public ResponseEntity<Operation> deposit(@RequestParam long clientId, @RequestParam BigDecimal amount) {
+        log.info("Start deposit operation");
         BankAccount bankAccount = accountManagement.findAccountByClientId(clientId);
         Operation depositOperation = accountOperations.deposit(bankAccount, amount);
         return new ResponseEntity<>(depositOperation, HttpStatus.OK);
@@ -46,6 +55,7 @@ public class BankAccountKataController {
 
     @PatchMapping("/withdraw")
     public ResponseEntity<Operation> withdraw(@RequestParam long clientId, @RequestParam BigDecimal amount) {
+        log.info("Start withdrawal operation");
         BankAccount bankAccount = accountManagement.findAccountByClientId(clientId);
         Operation withdrawOperation = accountOperations.withdraw(bankAccount, amount);
         return new ResponseEntity<>(withdrawOperation, HttpStatus.OK);
@@ -53,6 +63,7 @@ public class BankAccountKataController {
 
     @GetMapping("/operations/{clientId}")
     public ResponseEntity<List<Operation>> getOperationsHistory(@PathVariable("clientId") long clientId) {
+        log.info("Start getting operations history");
         BankAccount bankAccount = accountManagement.findAccountByClientId(clientId);
         List<Operation> operations = accountOperations.checkHistory(bankAccount);
         return new ResponseEntity<>(operations, HttpStatus.OK);
@@ -60,6 +71,7 @@ public class BankAccountKataController {
 
     @GetMapping("/statement/{clientId}")
     public ResponseEntity<String> getAccountStatement(@PathVariable("clientId") long clientId) {
+        log.info("Start getting account statement");
         BankAccount bankAccount = accountManagement.findAccountByClientId(clientId);
         String statement = statementPrinter.printAccountStatement(bankAccount);
         return new ResponseEntity<>(statement, HttpStatus.OK);

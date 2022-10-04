@@ -27,7 +27,7 @@ public class AccountOperationsImpl implements AccountOperations {
 
         Operation depositOperation = buildOperation(newBalance, amount, OperationType.DEPOSIT);
 
-        bankAccount.getOperationList().add(depositOperation);
+        bankAccount.getOperations().add(depositOperation);
         bankAccount.setBalance(newBalance);
 
         return depositOperation;
@@ -48,7 +48,7 @@ public class AccountOperationsImpl implements AccountOperations {
 
         Operation withdrawOperation = buildOperation(newBalance, amount, OperationType.WITHDRAWAL);
 
-        bankAccount.getOperationList().add(withdrawOperation);
+        bankAccount.getOperations().add(withdrawOperation);
         bankAccount.setBalance(newBalance);
 
         return withdrawOperation;
@@ -59,7 +59,7 @@ public class AccountOperationsImpl implements AccountOperations {
         if (bankAccount == null) {
             throw new BankOperationFailureException(NULL_ACCOUNT_MESSAGE);
         }
-        return bankAccount.getOperationList();
+        return bankAccount.getOperations();
     }
 
     private Operation buildOperation(BigDecimal newBalance, BigDecimal amount, OperationType operationType) {

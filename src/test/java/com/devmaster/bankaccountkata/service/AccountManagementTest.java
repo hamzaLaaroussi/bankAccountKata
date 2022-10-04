@@ -36,7 +36,7 @@ class AccountManagementTest {
                 .id(123456789)
                 .firstName("Jon")
                 .lastName("LEE")
-                .tel("0681895421")
+                .phone("0681895421")
                 .address("Paris")
                 .build();
         BankAccount bankAccount = new BankAccount(); //Instantiate it for AccountNum and creationDate Initiation
@@ -49,7 +49,7 @@ class AccountManagementTest {
         assertNotNull(createdBankAccount.getCreationDate());
         assertNotNull(createdBankAccount.getClient());
         assertEquals(client.getId(), createdBankAccount.getClient().getId());
-        assertEquals(client.getTel(), createdBankAccount.getClient().getTel());
+        assertEquals(client.getPhone(), createdBankAccount.getClient().getPhone());
         assertEquals(client.getAddress(), createdBankAccount.getClient().getAddress());
         assertEquals(client.getFirstName(), createdBankAccount.getClient().getFirstName());
         assertEquals(client.getLastName(), createdBankAccount.getClient().getLastName());
@@ -61,7 +61,7 @@ class AccountManagementTest {
                 .id(11111111)
                 .firstName("Melissa")
                 .lastName("COOPER")
-                .tel("0681895421")
+                .phone("0681895421")
                 .address("Paris")
                 .build();
         BankAccount bankAccount1 = new BankAccount(); //Instantiate it for AccountNum and creationDate Initiation
@@ -71,7 +71,7 @@ class AccountManagementTest {
                 .id(2222222)
                 .firstName("Marc")
                 .lastName("CRUZ")
-                .tel("06587451236")
+                .phone("06587451236")
                 .address("New York")
                 .build();
         BankAccount bankAccount2 = new BankAccount(); //Instantiate it for AccountNum and creationDate Initiation
@@ -87,7 +87,7 @@ class AccountManagementTest {
         assertNotNull(createdBankAccount.getCreationDate());
         assertNotNull(createdBankAccount.getClient());
         assertEquals(client1.getId(), createdBankAccount.getClient().getId());
-        assertEquals(client1.getTel(), createdBankAccount.getClient().getTel());
+        assertEquals(client1.getPhone(), createdBankAccount.getClient().getPhone());
         assertEquals(client1.getAddress(), createdBankAccount.getClient().getAddress());
         assertEquals(client1.getFirstName(), createdBankAccount.getClient().getFirstName());
         assertEquals(client1.getLastName(), createdBankAccount.getClient().getLastName());
@@ -99,7 +99,7 @@ class AccountManagementTest {
                 .id(11111111)
                 .firstName("Melissa")
                 .lastName("COOPER")
-                .tel("0681895421")
+                .phone("0681895421")
                 .address("Paris")
                 .build();
         BankAccount bankAccount = new BankAccount(); //Instantiate it for AccountNum and creationDate Initiation

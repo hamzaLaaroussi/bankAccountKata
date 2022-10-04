@@ -55,7 +55,7 @@ public class StatementPrinterTest {
         bankAccountWithOperations = new BankAccount();
         bankAccountWithOperations.setClient(client);
         bankAccountWithOperations.setBalance(new BigDecimal("550.50"));
-        bankAccountWithOperations.setOperationList(Arrays.asList(operationDeposit, operationWithdraw));
+        bankAccountWithOperations.setOperations(Arrays.asList(operationDeposit, operationWithdraw));
 
     }
 
@@ -71,8 +71,8 @@ public class StatementPrinterTest {
     void should_printStatement_when_bankAccountHavingOperations() {
         String statementPrint = statementPrinter.printAccountStatement(bankAccountWithOperations);
         assertNotNull(statementPrint);
-        Operation depositOperation = bankAccountWithOperations.getOperationList().get(0);
-        Operation withdrawOperation = bankAccountWithOperations.getOperationList().get(1);
+        Operation depositOperation = bankAccountWithOperations.getOperations().get(0);
+        Operation withdrawOperation = bankAccountWithOperations.getOperations().get(1);
         final String headerPrint = "date|operation|amount|balance|";
         final String depositOperationPrint = "" + depositOperation.getOperationDate().format(DATE_FORMATTER)
                 + "|"

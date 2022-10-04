@@ -48,7 +48,7 @@ public class StatementPrinterImpl implements StatementPrinter {
 
     private String printOperations(BankAccount bankAccount) {
         return bankAccount
-                .getOperationList()
+                .getOperations()
                 .stream()
                 .map(this::printOperation)
                 .collect(Collectors.joining(""));

@@ -62,6 +62,27 @@ public class BankAccountKataControllerTest {
     }
 
     @Test
+    void should_returnAccount_When_findAccountById() throws Exception {
+        Client client = Client.builder()
+                .id(123456789)
+                .firstName("Jon")
+                .lastName("LEE")
+                .build();
+        BankAccount bankAccount = new BankAccount(); // Instantiate it for AccountNum and creationDate Initiation
+        bankAccount.setClient(client);
+
+        Mockito.when(data.values()).thenReturn(Collections.singleton(bankAccount));
+        this.mockMvc
+                .perform(get("/api/bankaccountkata/{clientId}", client.getId()))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.accountNum").exists())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.client.id").value(123456789))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.client.firstName").value("Jon"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.client.lastName").value("LEE"));
+    }
+
+    @Test
     void should_ReturnOperation_When_callingDepositMethod() throws Exception {
         Client client = Client.builder()
                 .id(123456789)
@@ -164,7 +185,7 @@ public class BankAccountKataControllerTest {
         Operation operationDeposit = Operation.builder().amount(new BigDecimal(110)).type(OperationType.DEPOSIT).balance(new BigDecimal(210)).build();
         Operation operationWithdraw = Operation.builder().amount(new BigDecimal(10)).type(OperationType.WITHDRAWAL).balance(new BigDecimal(200)).build();
 
-        bankAccount.setOperationList(Arrays.asList(operationDeposit, operationWithdraw));
+        bankAccount.setOperations(Arrays.asList(operationDeposit, operationWithdraw));
         Mockito.when(data.values()).thenReturn(Collections.singleton(bankAccount));
 
         data.put(bankAccount.getAccountNum(), bankAccount);
@@ -200,7 +221,7 @@ public class BankAccountKataControllerTest {
                 .operationDate(LocalDate.of(2022, 9, 23))
                 .build();
 
-        bankAccount.setOperationList(Arrays.asList(operationDeposit, operationWithdraw));
+        bankAccount.setOperations(Arrays.asList(operationDeposit, operationWithdraw));
         Mockito.when(data.values()).thenReturn(Collections.singleton(bankAccount));
 
         data.put(bankAccount.getAccountNum(), bankAccount);
